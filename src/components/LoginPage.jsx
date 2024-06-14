@@ -12,7 +12,7 @@ const LoginPage = () => {
     try {
       const response = await axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password });
       // Debugging line to check response
-      // console.log('Server Response:', response.data); 
+      console.log('Server Response:', response.data); 
 
       // Store token in local storage
       const { token, username } = response.data;
