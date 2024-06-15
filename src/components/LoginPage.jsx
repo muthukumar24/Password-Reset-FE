@@ -10,24 +10,14 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password });
-      // Debugging line to check response
-      console.log('Server Response:', response.data); 
-
-      // Store token in local storage
-      const { token, username } = response.data;
-      if (token) {
-        // Ensure this matches the key used when removing the token
-        localStorage.setItem('token', token);
-        // Debugging line to confirm storage 
-        // console.log('Token stored in local storage:', token); 
-        // Navigate to home page
-        navigate('/home', { state: { username } });
-      } else {
-        // Error log if token is not found
-        console.error('No token found in response'); 
-      }
-
+      (await axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password }))
+      .then(response => {
+        localStorage.setItem('token', response.data.token);
+        message.success('Login successful');
+        navigate('/home', { state: response.data.username });
+    }).catch(error => {
+      message.error('Login failed!')
+    });
     } catch (error) {
       // Debugging line to check error
       console.error('Error during login:', error.response ? error.response.data : error.message); 
