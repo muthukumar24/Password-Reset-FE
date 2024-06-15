@@ -10,21 +10,16 @@ const LoginPage = () => {
 
   axios.defaults.withCredentials = true;
 
-  const handleLogin = async () => {
-    try {
-       await axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password })
+  const handleLogin = () => {
+       axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password })
       .then(response => {
         localStorage.setItem('token', response.data.token);
         alert('Login successful');
         navigate('/home', { state: response.data.username });
     }).catch(error => {
+      alert('Login failed');
       console.log("Error", error);
     });
-    } catch (error) {
-      // Debugging line to check error
-      console.error('Error during login:', error.response ? error.response.data : error.message); 
-      alert('Invalid credentials');
-    }
   };
 
 
