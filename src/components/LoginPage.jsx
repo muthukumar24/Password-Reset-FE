@@ -8,15 +8,17 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  axios.defaults.withCredentials = true;
+
   const handleLogin = async () => {
     try {
-      (await axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password }))
+       await axios.post('https://password-reset-usd2.onrender.com/auth/login', { email, password })
       .then(response => {
         localStorage.setItem('token', response.data.token);
-        message.success('Login successful');
+        alert('Login successful');
         navigate('/home', { state: response.data.username });
     }).catch(error => {
-      message.error('Login failed!')
+      console.log("Error", error);
     });
     } catch (error) {
       // Debugging line to check error
