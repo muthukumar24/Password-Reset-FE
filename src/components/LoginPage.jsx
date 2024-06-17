@@ -44,7 +44,7 @@ const LoginPage = () => {
             <div className='row d-flex justify-content-center align-items-center'>
               <div className='col-sm-12 col-md-10 col-lg-8 col-xl-8'>
                 <h1 className='text-center'><i className="bi bi-person-circle"></i></h1>
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form >
                   <div className="mb-3">
                     <label className="form-label">Email</label>
                     <input
